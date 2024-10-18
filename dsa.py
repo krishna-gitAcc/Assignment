@@ -1,5 +1,6 @@
 
 from typing import List
+from collections import deque;
 
 
 # Definition for a Node.
@@ -12,7 +13,24 @@ class Node:
 class Solution:
 
     def createTree(input: List):
-        pass
+        if input == None or input.size() == 0:
+            return None;
+
+        root = Node(input[0]);
+        queue = deque([root]);
+        i = 2;
+
+        while i < len(input):
+            parent = queue.popleft();
+
+            while i< len(input) and input[i] is not None:
+                child = Node(input[i]);
+                parent.children.append(child);
+                queue.append(child);
+                i += 1;
+            i += 1;
+
+        return root;
 
     def postorder(self, root: Node) -> List[int]:
         pass
